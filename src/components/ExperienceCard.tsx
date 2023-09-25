@@ -9,10 +9,9 @@ type Props = {
 
 function ExperienceCard({experience}: Props) {
   return (
-    <article className='flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:w-[900px] snap-center bg-[#292929] p-10 opacity-40 
+    <article className='flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:max-w-xl snap-center bg-[#292929] p-10 opacity-40 
     hover:opacity-100 transition-opacity duration-250'>
-        {experience?.companyImage ? (
-            <motion.img
+        <motion.div
                 initial={{ 
                     y: -100,
                     opacity: 0,
@@ -20,21 +19,19 @@ function ExperienceCard({experience}: Props) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2 }}
                 viewport={{ once: true }}
-                className='w-16 h-16 rounded-full xl:w-[200px] xl:h-[200px] object-cover object-center'
-                src={urlFor(experience?.companyImage).url()}
-                alt=''
-            />
-        ): null}
-
+                className='relative h-16 w-16 object-center bg-white rounded-full flex xl:h-28 xl:w-28'
+            >
+                <Image className='' src={urlFor(experience?.companyImage).url()} layout='fill' alt={experience.company}/>
+            </motion.div>
         <div className='px-0 md:px-10'>
-            <h4 className='text-4xl font-light'>{experience.jobTitle}</h4>
+            <h4 className='text-3xl font-light'>{experience.jobTitle}</h4>
             <p className='font-bold text-2xl mt-1'>{experience.company}</p>
             <div className='flex space-x-2 my-2'>
-                <div className='relative h-10 w-10'>
+                <div className='flex items-center justify-center space-x-2 margin-auto'>
                     {experience.technologies.map((technology) => (
-                        <div key={technology._id} >
+                        <div key={technology._id} className='relative h-10 w-10'>
                             {technology?.image ? (
-                                <Image className='rounded-full' src={urlFor(technology?.image).url()} layout='fill' alt='js'/>
+                                <Image className='object-contain' src={urlFor(technology?.image).url()} layout='fill' alt='js'/>
                             ) : null}
                         </div>
                     ))}
@@ -47,7 +44,7 @@ function ExperienceCard({experience}: Props) {
                     : new Date(experience.dateEnded).toDateString()
                 }
             </p>
-            <ul className='space-y-4 list-disc ml-5 text-lg h-80 overflow-y-scroll scrollbar-thin scrollbar-track-black scrollbar-thumb-[#F7AB0A]/80'>
+            <ul className='space-y-4 list-disc ml-5 text-lg h-28 w-full overflow-y-scroll scrollbar-thin'>
                 {experience.points.map((point, i) => (
                     <li key={i}>{point}</li>
                 ))}

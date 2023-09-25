@@ -25,7 +25,11 @@ type Props = {
 
 const Home: React.FC<Props> = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
   if (pageInfo === null) {
-    return <div>Loading...</div>; 
+    return (
+      <div className='bg-[rgb(36,36,36)] flex items-center justify-center h-screen w-screen text-gray-400 m-auto'>
+        <div className='animate-pulse text-3xl'>Loading...</div>
+      </div>
+    )
   }
   return (
     <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80'>
