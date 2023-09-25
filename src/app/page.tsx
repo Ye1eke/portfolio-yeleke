@@ -1,6 +1,5 @@
 "use client"
 
-import Image from 'next/image'
 import Header from '../components/Header'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
@@ -9,7 +8,6 @@ import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import ContactMe from '@/components/ContactMe'
 import Link from 'next/link'
-import { GetStaticProps } from 'next'
 import { Experience, PageInfo, Project, Skill, Social } from '../../typings'
 import { fetchPageInfo } from '../../utils/fetchPageInfo'
 import { fetchExperiences } from '../../utils/fetchExperiences'
@@ -68,7 +66,7 @@ const Home: React.FC<Props> = ({ pageInfo, experiences, skills, projects, social
   )
 }
 
-const HomePage: React.FC<Props> = () => {
+const HomePage: React.FC = () => {
   const [pageInfo, setPageInfo] = useState<PageInfo | null>(null);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
