@@ -17,7 +17,7 @@ function Skills({skills}: Props) {
         
         <h3 className='uppercase tracking-[18px] text-gray-500 text-2xl absolute top-20'>Skills</h3>
         
-        <h3 className='uppercase tracking-[3px] text-gray-500 text-sm absolute top-32'>
+        <h3 className='uppercase tracking-[3px] text-gray-500 text-sm absolute top-28 text-center'>
           Hover over a skill to see a proficiency <br/> out of 100%
         </h3>
 

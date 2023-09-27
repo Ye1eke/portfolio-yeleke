@@ -3,6 +3,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Project } from '../../typings'
 import { urlFor } from '../../sanity'
+import Link from 'next/link'
 type Props = {
     projects: Project[]
 }
@@ -19,40 +20,45 @@ function Projects({projects}: Props) {
 
         <div className='relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80'>
             {projects.map((project, i) => (
-                <div key={project._id} className='w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen'>
-                    <motion.div 
-                        initial={{
-                            y: -300,
-                            opacity: 0,
-                        }}
-                        transition={{ duration: 1.2 }} 
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className='relative w-full h-full'>
-                        <Image className='object-contain' src={urlFor(project.image).url()} alt='ts' layout='fill'/>
-                    </motion.div>
+                    <div key={project._id} className='w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen'>
+                        <Link href={project?.linkToBuild}>
+                            <motion.div 
+                                initial={{
+                                    y: -300,
+                                    opacity: 0,
+                                }}
+                                transition={{ duration: 1.2 }} 
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className='relative'>
+                                    <Image className='object-contain md:object-cover hover:scale-110 transition-transform duration-300 ease-in-out' src={urlFor(project.image).url()} alt='ts' width={500} height={500}/>
+                            </motion.div>
+                        </Link>
+                        <div className='space-y-10 px-0 md:px-10 max-w-6xl'>
+                            <h4 className='text-4xl font-semibold text-center'>
+                                <span className='underline decoration-[#F7AB0A]/50'>Project {i + 1} of {projects.length}:</span> {project?.title}
+                            </h4>
+                            
+                            <div className='flex space-x-2 items-center justify-center'>
+                                    {project?.technologies.map((technology) => (
+                                        <div key={technology._id} className='relative h-12 w-12'>
+                                            <Image
+                                                className='object-cover object-center' 
+                                                src={urlFor(technology.image).url()}
+                                                alt={technology.title}
+                                                layout='fill'
+                                            />
+                                        </div>
+                                    ))}
+                                
+                            </div>
 
-                    <div className='space-y-10 px-0 md:px-10 max-w-6xl'>
-                        <h4 className='text-4xl font-semibold text-center'>
-                            <span className='underline decoration-[#F7AB0A]/50'>Case Study {i + 1} of {projects.length}:</span> {project?.title}
-                        </h4>
-                        
-                        <div className='relative flex items-center space-x-2 justify-center h-10 w-10 m-auto'>
-                            {project?.technologies.map((technology) => (
-                                <Image 
-                                    key={technology._id}
-                                    src={urlFor(technology.image).url()}
-                                    alt={technology.title}
-                                    layout='fill'
-                                />
-                            ))}
+                            <p className='text-lg text-center md:text-left'>
+                                {project?.summary}
+                            </p>
+
                         </div>
-
-                        <p className='text-lg text-center md:text-left'>
-                            {project?.summary}
-                        </p>
                     </div>
-                </div>
             ))}
         </div>
 

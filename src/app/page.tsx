@@ -24,48 +24,49 @@ type Props = {
 }
 
 const Home: React.FC<Props> = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
-  if (pageInfo === null) {
-    return (
-      <div className='bg-[rgb(36,36,36)] flex items-center justify-center h-screen w-screen text-gray-400 m-auto'>
-        <div className='animate-pulse text-3xl'>Loading...</div>
-      </div>
-    )
-  }
+  
   return (
     <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80'>
 
       <Header socials={socials} />
+      {pageInfo === null ? (
+        <div className='bg-[rgb(36,36,36)] flex items-center justify-center h-screen w-screen text-gray-400 m-auto'>
+          <div className='animate-pulse text-3xl'>Loading...</div>
+        </div>
+      ) : (
+        <>
+          <section id='hero' className='snap-start'>
+            <Hero pageInfo={pageInfo} /> 
+          </section>
 
-      <section id='hero' className='snap-start'>
-        <Hero pageInfo={pageInfo} /> 
-      </section>
+          <section id='about' className='snap-center'>
+            <About pageInfo={pageInfo} />
+          </section>
 
-      <section id='about' className='snap-center'>
-        <About pageInfo={pageInfo} />
-      </section>
+          <section id='experience'className='snap-center'>
+            <WorkExperience experiences={experiences} />
+          </section>
 
-      <section id='experience'className='snap-center'>
-        <WorkExperience experiences={experiences} />
-      </section>
+          <section id='skills' className='snap-start'>
+            <Skills skills={skills} />
+          </section>
 
-      <section id='skills' className='snap-start'>
-        <Skills skills={skills} />
-      </section>
-
-      <section id='projects' className='snap-start'>
-        <Projects projects={projects} />
-      </section>
-      {/* Contact Me */}
-      <section id='contact' className='snap-start'>
-        <ContactMe pageInfo={pageInfo} />
-      </section>
-      <Link href='#hero'>
-        <footer className='sticky bottom-5 w-full cursor-pointer'>
-          <div className='flex items-center justify-center bg-[#F7AB0A] rounded-full w-7 h-7 m-auto animate-pulse text-black text-xl font-extrabold'>
-            ^
-          </div>
-        </footer>
-      </Link>
+          <section id='projects' className='snap-start'>
+            <Projects projects={projects} />
+          </section>
+          {/* Contact Me */}
+          <section id='contact' className='snap-start'>
+            <ContactMe pageInfo={pageInfo} />
+          </section>
+          <Link href='#hero'>
+            <footer className='sticky bottom-5 w-full cursor-pointer'>
+              <div className='flex items-center justify-center bg-[#F7AB0A] rounded-full w-7 h-7 m-auto animate-pulse text-black text-xl font-extrabold'>
+                ^
+              </div>
+            </footer>
+          </Link>
+        </>
+      )}
     </div>
   )
 }

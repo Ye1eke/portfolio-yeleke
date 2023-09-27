@@ -19,8 +19,8 @@ function About({pageInfo}: Props) {
             About
         </h3>
 
-        {pageInfo?.profilePic ? (
-            <motion.img
+        
+            <motion.div
             initial={{
                 x:-200,
                 opacity: 0,
@@ -30,10 +30,12 @@ function About({pageInfo}: Props) {
             }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            src={urlFor(pageInfo?.profilePic).url()}
-            className='mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-95 xl:w-[350px] xl:h-[450px]'
-        />
-        ) : null}
+            
+            className='relative mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full md:rounded-lg md:w-64 md:h-95 xl:w-[350px] xl:h-[450px]'
+            >
+                <Image className='object-cover' src={urlFor(pageInfo?.profilePic).url()} layout='fill' alt={pageInfo?.name} />
+            </motion.div>
+        
 
         <div className='space-y-10 px-0 md:px-10'>
             <h4 className='text-4xl font-semibold'>Here is a <span className='underline decoration-[#F7AB0A]/50'>little</span>{' '}
