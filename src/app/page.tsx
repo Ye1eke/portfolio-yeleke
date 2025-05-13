@@ -8,6 +8,7 @@ import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import ContactMe from '@/components/ContactMe'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Experience, PageInfo, Project, Skill, Social } from '../../typings'
 import { fetchPageInfo } from '../../utils/fetchPageInfo'
 import { fetchExperiences } from '../../utils/fetchExperiences'
@@ -15,7 +16,6 @@ import { fetchSkills } from '../../utils/fetchSkills'
 import { fetchProjects } from '../../utils/fetchProjects'
 import { fetchSocials } from '../../utils/fetchSocials'
 import React, { useEffect, useState } from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 type Props = {
   pageInfo: PageInfo | null;
@@ -32,13 +32,13 @@ const Home: React.FC<Props> = ({ pageInfo, experiences, skills, projects, social
 
       {pageInfo === null ? (
         <div className='bg-[rgb(36,36,36)] flex items-center justify-center h-screen w-screen text-gray-400 m-auto'>
-          <div className="w-64 h-64">
-          <DotLottieReact
-            src="https://lottie.host/efabceef-f5c6-4a60-995c-516122af004b/Fn3YLx12QX.lottie"
-            loop
-            autoplay
+          <Image 
+            src="/animations/horse.gif"
+            alt="Loading..."
+            width={128}
+            height={128}
           />
-          </div>
+
         </div>
       ) : (
         <>
