@@ -15,6 +15,8 @@ import { fetchSkills } from '../../utils/fetchSkills'
 import { fetchProjects } from '../../utils/fetchProjects'
 import { fetchSocials } from '../../utils/fetchSocials'
 import React, { useEffect, useState } from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 type Props = {
   pageInfo: PageInfo | null;
   experiences: Experience[];
@@ -28,13 +30,19 @@ const Home: React.FC<Props> = ({ pageInfo, experiences, skills, projects, social
   return (
     <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80'>
 
-      <Header socials={socials} />
       {pageInfo === null ? (
         <div className='bg-[rgb(36,36,36)] flex items-center justify-center h-screen w-screen text-gray-400 m-auto'>
-          <div className='animate-pulse text-3xl'>Loading...</div>
+          <div className="w-64 h-64">
+          <DotLottieReact
+            src="https://lottie.host/efabceef-f5c6-4a60-995c-516122af004b/Fn3YLx12QX.lottie"
+            loop
+            autoplay
+          />
+          </div>
         </div>
       ) : (
         <>
+          <Header socials={socials} />  
           <section id='hero' className='snap-start'>
             <Hero pageInfo={pageInfo} /> 
           </section>
